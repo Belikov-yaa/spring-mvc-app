@@ -37,7 +37,16 @@ public class ProductsRepository {
     }
 
     public void addProductToList(Product product) {
-        product.setId(++count);
-        products.add(product);
+        if (product.getId() == 0) {
+            product.setId(++count);
+            products.add(product);
+        } else {
+            for (Product productInList : products) {
+                if(product.getId() == productInList.getId()) {
+                    productInList.setTitle(product.getTitle());
+                    productInList.setCost(product.getCost());
+                }
+            }
+        }
     }
 }
