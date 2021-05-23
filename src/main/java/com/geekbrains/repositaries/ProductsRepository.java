@@ -1,0 +1,43 @@
+package com.geekbrains.repositaries;
+
+import com.geekbrains.entites.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class ProductsRepository {
+
+    private final List<Product> products = new ArrayList<>();
+    private int count = 0;
+
+    //    @Autowired
+    public ProductsRepository() {
+        products.add(new Product(++count, "Potato", 3.40));
+        products.add(new Product(++count, "Tomato", 5.60));
+        products.add(new Product(++count, "Milk", 2.15));
+        products.add(new Product(++count, "Bread", 1.60));
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public Product getProductByID(int id) {
+        Product result = null;
+        for (Product product : products) {
+            if (product.getId() == id) {
+                result = product;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public void addProductToList(Product product) {
+        product.setId(++count);
+        products.add(product);
+    }
+}
